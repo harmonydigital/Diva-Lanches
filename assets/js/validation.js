@@ -58,13 +58,13 @@ function initApp(user){
   userView.innerHTML= `  
     <div style="padding: 0 15px; "> 
      <!-- <img src="assets/images/user.png" alt=""> -->
-     <i style="color:black;" class="fa-regular fa-user"></i>
+     <i  class="fa-regular fa-user"></i>
 
-        Olá <strong>`+user +`,</strong>
+        Olá <strong>`+user +`</strong>
     </div>
-    <div style="position: absolute;top: 0;right: 0;margin: 25px;color: black; ">
-    <button onclick=" exitSection()" ><i class="fa-solid fa-right-from-bracket"></i> sair</button>
-    <button id="btnFullScreen" onclick="fullScreen()"><i style="color: black !important" class="fa-solid fa-expand"></i></button>
+    <div style="position: absolute;top: 0;right: 0;margin: 25px;color: white; ">
+    <button style=" color: white; " onclick=" exitSection()" ><i class="fa-solid fa-right-from-bracket"></i> sair</button>
+    <button id="btnFullScreen" onclick="fullScreen()"><i  class="fa-solid fa-expand"></i></button>
 
 </div>
     

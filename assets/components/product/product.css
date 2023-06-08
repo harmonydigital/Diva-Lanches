@@ -47,11 +47,10 @@
     height: 32px;
     border: 0px;
     border-radius: 12px;
-    color: black;
-    background-color: #FED30A;
+    color: white;
+    background-color: #ff5400;
     margin: 5px;
     font-size: 15px;
-    font-weight: 900;
 }
 .produto .quantidade input {
     width: 23px;
