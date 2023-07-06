@@ -71,8 +71,8 @@ span.qtdIcon {
     font-size: 1.3rem;
 }
 .total button {
-    background: #FED30A;
-    color: black;
+    background: #ff5400;
+    color: white;
     /* border: 1px solid; */
     font-size: 1.0rem;
     border-radius: 20px;
