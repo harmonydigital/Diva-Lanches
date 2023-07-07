@@ -10,7 +10,9 @@
     display: flex;
     align-items: center;
 }
- 
+.search svg {
+    color: #ff5400 !important;
+}
 .search form .fa-magnifying-glass {
     left: 15px;
     position: relative;
@@ -21,6 +23,7 @@
 }
 
 .search input {
+    font-style: italic;
     width: 100%;
     margin: 0px;
     padding: 0px; 
