@@ -36,8 +36,15 @@
   
   <div id="list"></div>
   <div class="validation" id="validation" >
-    <div >
-      <button id="btnFullScreen" onclick="fullScreen()"><i style="color: red;" class="fa-solid fa-expand"></i></button>
+    <div style="
+    display: flex;
+    justify-content: center;
+">
+      <button id="btnFullScreen" onclick="fullScreen(event)"><i style="color: red;" class="fa-solid fa-expand"></i>
+        <span>tela cheia</span>
+      </button>
+      <button id="btnCloseFullScreen" onclick="closeFullscreen(event)">
+        <i class="fa-regular fa-circle-xmark"></i></button>
 
     </div>
     <div class="content" >
@@ -50,8 +57,7 @@
     <form action="">
       <div class="content-text">
         <h1>Agora no app <strong>sem filas!</strong></h1>
-        <img class="boy" src="assets/images/motoboy.png" alt="">
-
+         
       </div>
       <div class="mylabel">
         <label style=" top: -2px; height: 48px;bottom: 0;"> 
@@ -70,6 +76,7 @@
           <option value="1">Selecione a forma de retirada</option>
           <option value="2">Delivery</option>
           <option value="3">Mesa</option>
+          <option value="3">Retirar no balcão</option>
         </select>
       </div>
       <button type="submit" onclick="validation(event)" value="submit">Cardápio
@@ -117,6 +124,8 @@
 
       <div class="content">
         <h2>Finalizar Pedido </h2>
+        <p><i class="fa-solid fa-location-crosshairs"></i> End. Praia da Lagoinha - Nº 000  | Ubatuba-SP</p>
+      
       </div>
 
       <form id="checkoutform" class="checkoutform" >
@@ -127,14 +136,17 @@
               ">
             Forma de retirada:
             </label> 
+           
             <div class="mylabel select">
               <label>
               <img src="assets/images/inputs/archive.png" >
               </label>
               <select onchange="formaRetirada()" id="selectCheckout">
                 <option value="1">Selecione a forma de retirada</option>
-                <option value="balcao">Delivery</option>
-                <option value="mesa">Mesa</option>
+                <option value="mesa">Mesa</option> 
+                <option value="balcao">Retirar no balcão</option>
+                <option value="delivery">Delivery</option>
+
               </select>
             </div>
             <div id="setMesa" class="mylabel"  style="display:none">
@@ -143,13 +155,14 @@
               </label>
               <input id="inputMesa"  type="number" placeholder="Digite o numero da mesa">
             </div>
+            
             <div id="whatsappId"  style="display: none; ">
-              <!-- <span>Receba notificação via whatsapp </span> -->
+              <span class="alertcheck" id='dezdelivery'><i class="fa-solid fa-info"></i>Taxa de entrega 10% do pedido. </span>
               <div id="setPhone" class="mylabel" >
                 <label style="height:48px;">   
                 <i class="fa-solid fa-location-dot"></i>
                 </label>
-                <input id="inputLocation"  type="text" placeholder="Endereço de entrega..."  >
+                <input id="inputLocation"  type="text" placeholder="Digite o local da entrega .."  >
               </div>
 
               <div id="setEnd" class="mylabel" >
@@ -157,7 +170,10 @@
                 <img src="assets/images/inputs/whats.png" >  
                 </label>
                 <input id="inputMesa"  type="number" placeholder="Numero celular whatsapp">
+
               </div>
+              <span class="alertcheck"><i class="fa-solid fa-info"></i> Receba notificações via whatsapp </span>
+
             </div>
             
           </div>
@@ -196,40 +212,29 @@
   <div class="search">
     <h2>O que deseja pedir hoje?</h2>
     <form>
-      <!--           
-        <div class="mylabel">
-          <label>  <img src="assets/images/inputs/user.png" style="width: 16px;">
-          </label>
-          <input id="userName" style="margin-bottom: 5px !important;" placeholder="Digite seu nome" type="text" required> 
-        </div> -->
+      
       <div class="mylabel">
         <label style="
           top: 0px;
           height: 46px;
           ">  
-        <!-- <img src="assets/images/search.png" alt=""> -->
+       
         <i class="fa-solid fa-magnifying-glass"></i>  
         </label>
         <input  onclick="getSearch(event)" type="text" placeholder="Buscar produtos...">
-        <!-- <i class="fa-solid fa-arrow-right"></i> -->
+     
       </div>
       <div id="contentSearch" class="contentSearch">
         <!-- CONTROLES -->
         <div class="controls">
           <button onclick="getSearch(event)">
-            <svg class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
-              <path fill="currentColor" d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 278.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"></path>
-            </svg>
-            <!-- <i class="fa-solid fa-chevron-left"></i> Font Awesome fontawesome.com -->
+            <i class="fa-solid fa-chevron-left"></i>
           </button>
           <button onclick="getSearch(event)">
-            <svg class="svg-inline--fa fa-xmark" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
-              <path fill="currentColor" d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"></path>
-            </svg>
-            <!-- <i class="fa-solid fa-xmark"></i> Font Awesome fontawesome.com -->
+            <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
-        <div class="mylabel" style="position: inherit;width: 100%;margin-top: 50px;margin-bottom: 10px;margin-left: 10px;"> 
+        <div class="mylabel" style="position: inherit;width: 100%;margin-top: 80px;margin-bottom: 10px;margin-left: 10px;"> 
           <label>  
               <i class="fa-solid fa-magnifying-glass"></i>
           </label>
@@ -237,7 +242,10 @@
         </div>
       </div>
     </form>
-    <div id="searchResult"></div>
+    <div id="searchResult">
+      <span class="ux">Encontre produtos aqui...O que está buscando?</span>
+
+    </div>
   </div>
    
   <div id="categories" class="categories"> </div>
@@ -267,14 +275,12 @@
  <script type="module">
  
     const firebaseConfig = {
-      apiKey: "AIzaSyAyxC6S9lIs2q6MXPJzB4rpjod3HbRXJgU",
-      authDomain: "harmonyfoodapp.firebaseapp.com",
-      databaseURL: "https://harmonyfoodapp-default-rtdb.firebaseio.com",
-      projectId: "harmonyfoodapp",
-      storageBucket: "harmonyfoodapp.appspot.com",
-      messagingSenderId: "910886750410",
-      appId: "1:910886750410:web:810fa41051ae6d12684c33",
-      measurementId: "G-9HD4J8Z2XP"
+      apiKey: "AIzaSyCh6Q_k8wZjWZ65mZpZE00B6NlTcI7pcoU",
+      authDomain: "canoas-88911.firebaseapp.com",
+      projectId: "canoas-88911",
+      storageBucket: "canoas-88911.appspot.com",
+      messagingSenderId: "725157058271",
+      appId: "1:725157058271:web:f8256d35ff289ef560bb6a"
     }; 
 
       // Initialize Firebase
@@ -476,12 +482,6 @@
         document.getElementById('msgLoad').style.cssText='display:flex'
         btnSubmitOrder.setAttribute("disabled", true)
 
-
-        
-       
-
-
-
  
  
         if(databaseDeliveryArr.length>0){
@@ -524,6 +524,16 @@
                       
                       if(initF==true){ 
                           // ENVIA PEDIDO DELIVERY
+
+
+                          console.lo('ponto1',
+                            {  
+                                "name":userNameString,
+                                "id":idClient,
+                                "whatsapp":inpuMWhats,
+                                orders:recebePedidos   
+                          }
+                          )
                           db.collection('delivery').doc(idClient).set({  
                                 "name":userNameString,
                                 "id":idClient,
@@ -531,7 +541,7 @@
                                 orders:recebePedidos   
                           }) 
 
-                          // ENVIA NOTIFICACAO DELIVERY
+                          // // ENVIA NOTIFICACAO DELIVERY
                           db.collection('notificacoes').doc(horaReplace).set({  
                                 "name":userNameString,
                                 "whatsapp":inpuMWhats,
@@ -602,8 +612,21 @@
 
         }else{ 
 
+
+
+
+            //PRIMEIRO PEDIDO DELIVER?
+
               let userNameString=inputUserName.toLowerCase().replace(/\s/g, '');
               let idClient=localStorage.getItem("idClient");
+
+              console.log('first buy ?',{  
+                "name":userNameString,
+                "id":idClient, 
+                "whatsapp":inpuMWhats, 
+                orders:allordersBuy  //<==================Pedidos Recebidos
+                
+              })
               db.collection('delivery').doc(idClient).set({  
                 "name":userNameString,
                 "id":idClient, 
