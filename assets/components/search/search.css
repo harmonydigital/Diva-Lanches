@@ -13,9 +13,15 @@
 .search svg {
     color: #ff5400 !important;
 }
+.search .controls {
+    position: absolute;}
 .search form .fa-magnifying-glass {
     left: 15px;
     position: relative;
+}
+div#searchResult .ux {
+    display: flex;
+    margin: 51px;
 }
 .search form .fa-arrow-right {
     right: 45px;

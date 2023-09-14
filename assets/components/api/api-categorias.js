@@ -1,8 +1,11 @@
 
  
-fullScreen=()=>{
+fullScreen=(event)=>{
     var element = document.documentElement;
-    
+
+    document.getElementById('btnCloseFullScreen').style.cssText='display:block'
+    document.getElementById('btnFullScreen').style.cssText='display:none'
+  
     if (element.requestFullscreen) {
         element.requestFullscreen();
     } else if (element.mozRequestFullScreen) {
@@ -13,7 +16,19 @@ fullScreen=()=>{
         element.msRequestFullscreen();
     }
 } 
+function closeFullscreen(event) { 
 
+    document.getElementById('btnCloseFullScreen').style.cssText='display:none'
+    document.getElementById('btnFullScreen').style.cssText='display:block'
+
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) { /* Safari */
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE11 */
+      document.msExitFullscreen();
+    }
+  }
  
 data=[]  
 database=[]  
@@ -227,6 +242,7 @@ STATUSMESA=false
   var cartPreview = document.getElementById('cartPreview')
   input =document.getElementById(inputProd)
 
+
   cartQtd=0
   totalCart=0
   itensTotal=0
@@ -344,6 +360,9 @@ STATUSMESA=false
             }]
         }
 
+        //RESUMO DA COMPRA CARRINHO
+
+
         document.getElementById("itensTotal").innerHTML+=  itensTotal
         cartContainer.innerHTML+= ` 
 
@@ -358,9 +377,12 @@ STATUSMESA=false
             </div> 
         `; 
 
+
+        //RESUMO DA COMPRA CHECKOUT
+
         totalfinesh.innerHTML+=`
         <div class="total" id="fineshPay" style=" z-index: 99;"> 
-            Total da compra
+            Toaatal da compra
             `+totalCart.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) +` 
 
             <span id="clickpague"   onclick="animatedCheckOut()">clique e pague</span>
@@ -424,13 +446,49 @@ sendOrder=(event)=>{
 }
 
 closeCheckout=()=>{ 
+
     containerCheckout.classList.toggle("hide");
+
+    document.getElementById('selectCheckout').value=1 
+    var warningCheck=document.querySelectorAll('.alertcheck') 
+    var arrWarn=Array.from(warningCheck)
+
+    setMesa.style.cssText="display:none"  
+    whatsappId.style.cssText="display:none" 
+
+    arrWarn.map((element)=>{
+        element.style.cssText='display:none;'
+    })
+    totalfinesh.innerHTML=`
+    <div class="total" id="fineshPay" style=" z-index: 99;"> 
+        Total compra delivery
+        `+totalCart.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) +` 
+
+        <span style='display:none;' id="clickpague"   onclick="animatedCheckOut()">clique e pague</span>
+        
+        <div id="rrcode" style='display:none;' >
+            <img src="https://lidneyr.github.io/adm/assets/components/impressao/andd.png"> 
+
+       <span > Pague com QR CODE </span>
+  
+       </div>
+    
+         <button type="submit" id="submitCheck">ENVIAR MEU PEDIDO 
+         <i class="fa-solid fa-paper-plane"></i>
+         </button>
+    </div> 
+    `;
+
+    // document.querySelectorAll('alertcheck').style.cssText='display:none;'
+    
 }
 
 
     ///update
    
 openTable=()=>{
+
+    console.log('open')
     setTimeout(function(){
 
         tabcontent = document.getElementsByClassName("tabcontent");
